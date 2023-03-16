@@ -16,6 +16,10 @@ class BaseContact:
     def __str__(self):
         return f'{self.first_name} {self.last_name}, {self.email}'
     
+    def __repr__(self):
+        return f'Card(first_name = {self.first_name}, last_name = {self.last_name}, email = {self.email} )'
+        
+    
     @property
     def label_lenght(self):
         return (len(self.first_name) + len(self.last_name)) 
@@ -38,11 +42,13 @@ class BusinessContact(BaseContact):
     @property
     def label_lenght(self):
         return (len(self.first_name) + len(self.last_name)) 
-        
-person1 = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), phone_number=fake.phone_number(), email=fake.email())
-person2 = BusinessContact(first_name =fake.first_name(), last_name=fake.last_name(), phone_number=fake.phone_number(), email=fake.email(), 
-                          company=fake.company(), job=fake.job(), business_phone_number=fake.phone_number())
+def create_contact(qnt):      
+    cards = []
+    for i in range(qnt):
+        cards.append(BusinessContact(first_name =fake.first_name(), last_name=fake.last_name(), phone_number=fake.phone_number(), email=fake.email(), 
+                                company=fake.company(), job=fake.job(), business_phone_number=fake.phone_number()))
+    return cards
 
-print(person1.label_lenght)
+print(create_contact(5))
 
 
