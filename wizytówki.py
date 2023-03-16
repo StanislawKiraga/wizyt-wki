@@ -39,11 +39,10 @@ class BusinessContact(BaseContact):
     def label_lenght(self):
         return (len(self.first_name) + len(self.last_name)) 
         
-person1 = BaseContact(first_name='Adam', last_name='Sandler', phone_number=123456789, email='adam@sand.star')
-person2 = BusinessContact(first_name ='Basia', last_name='Bęben', phone_number=123123123, email='basia@beben.be', 
-                          company='Company', job='worker', business_phone_number= 345234345)
+person1 = BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), phone_number=fake.phone_number(), email=fake.email())
+person2 = BusinessContact(first_name =fake.first_name(), last_name=fake.last_name(), phone_number=fake.phone_number(), email=fake.email(), 
+                          company=fake.company(), job=fake.job(), business_phone_number=fake.phone_number())
 
-def create_contact():
-
+print(person1.label_lenght)
 
 
