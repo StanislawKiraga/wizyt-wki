@@ -1,5 +1,7 @@
 from faker import Faker
 fake = Faker()
+import time
+from functools import wraps
 
 class BaseContact:
     def __init__(self, first_name, last_name, email, phone_number):
@@ -46,6 +48,17 @@ class BusinessContact(BaseContact):
     def label_lenght(self):
         return (len(self.first_name) + len(self.last_name)) 
     
+def measure(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        total_time = time.time() - start_time
+        print(f'{total_time} s')
+        return result
+    return wrapper
+
+@measure    
 def create_contact(type, qnt=int()):      
     base = []
     business = []
@@ -59,3 +72,4 @@ def create_contact(type, qnt=int()):
             base.append(BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), phone_number=550650750, email=fake.email()))
         return base
 
+print(create_contact('base', 2))
