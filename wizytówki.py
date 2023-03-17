@@ -37,18 +37,25 @@ class BusinessContact(BaseContact):
         return f'Wybieram numer {self.business_phone_number} i dzwonię do {self.first_name} {self.last_name}'
     
     def __str__(self):
-        return f'{self.first_name} {self.last_name}, {self.job}, {self.email}'
+        return f'{self.first_name} {self.last_name}, {self.company}, {self.job}, {self.email}'
+    
+    def __repr__(self):
+        return f'first_name = {self.first_name}, last_name = {self.last_name}, company = {self.company}, job= {self.job}, email = {self.email}'
     
     @property
     def label_lenght(self):
         return (len(self.first_name) + len(self.last_name)) 
-def create_contact(qnt):      
-    cards = []
-    for i in range(qnt):
-        cards.append(BusinessContact(first_name =fake.first_name(), last_name=fake.last_name(), phone_number=fake.phone_number(), email=fake.email(), 
+    
+def create_contact(type, qnt=int()):      
+    base = []
+    business = []
+    if type == 'business':
+        for i in range(qnt):
+            business.append(BusinessContact(first_name =fake.first_name(), last_name=fake.last_name(), phone_number=fake.phone_number(), email=fake.email(), 
                                 company=fake.company(), job=fake.job(), business_phone_number=fake.phone_number()))
-    return cards
-
-print(create_contact(5))
-
+        return business
+    elif type == 'base':
+        for i in range(qnt):
+            base.append(BaseContact(first_name=fake.first_name(), last_name=fake.last_name(), phone_number=550650750, email=fake.email()))
+        return base
 
